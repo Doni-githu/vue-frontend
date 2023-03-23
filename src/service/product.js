@@ -2,7 +2,7 @@ import axios from "./axios"
 
 const Product = {
     getProduct(){
-        axios.get('/todos')
+        axios.get('/api/todos')
     }
 }
 

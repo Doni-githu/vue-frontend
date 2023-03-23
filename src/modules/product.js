@@ -1,4 +1,4 @@
-import Product from "../service/product"
+import Product from "../service/product.js"
 const state = {
     isLoading: false,
     data: null,
@@ -23,14 +23,10 @@ const actions = {
     getProducts(context) {
         return new Promise((resolve, reject) => {
             context.commit('startProduct')
-            Product.getProduct()
-                .then((res) => {
-                    resolve(res)
-                    context.commit('SuccessProduct', res)
-                }).catch(err => {
-                    reject(err)
-                    context.commit('FailurProduct', err)
-                })
+            const connected = Product.getProduct()
+            connected.then(res => {
+                context.commit('SuccessProduct', JSON.parse(res))
+            })
         })
     }
 }
