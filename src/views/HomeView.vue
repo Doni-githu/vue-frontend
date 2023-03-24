@@ -1,6 +1,7 @@
 <template>
   <div>
-    <Cards :data="data" v-if="data" />
+    <Cards v-if="data" :data="data" />
+    <Loader v-else />
   </div>
 </template>
 <script>

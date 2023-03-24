@@ -23,10 +23,12 @@ const actions = {
     getProducts(context) {
         return new Promise((resolve, reject) => {
             context.commit('startProduct')
-            const connected = Product.getProduct()
-            connected.then(res => {
-                context.commit('SuccessProduct', JSON.parse(res))
-            })
+            Product.getProduct()
+                .then(res => {
+                    context.commit('SuccessProduct', res.data)
+                }).catch(err => {
+                    context.commit('FailurProduct', err)
+                })
         })
     }
 }

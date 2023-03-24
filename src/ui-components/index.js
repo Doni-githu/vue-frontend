@@ -1,3 +1,3 @@
 import Input from "./Input.vue"
-
-export default [Input]
+import Loader from "./Loader.vue"
+export default [Input, Loader]

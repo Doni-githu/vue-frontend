@@ -2,7 +2,7 @@ import axios from "./axios"
 
 const Product = {
     getProduct(){
-        axios.get('/api/todos')
+        return axios.get('/api/todos', {headers: {"Content-type": 'text/json'}})
     }
 }
 
