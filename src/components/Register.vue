@@ -2,15 +2,17 @@
     <div class="w-50 mx-auto">
         <p class="fs-1 text-center">Register</p>
         <form @submit.prevent class="text-center">
-            <Input v-model="firstName" type="text" :label="'First Name'" />
-            <Input v-model="lastName" type="text" :label="'Last Name'" />
-            <Input v-model="email" type="email" :label="'Email'" />
-            <Input v-model="password" type="password" :label="'Password'" />
-            <button type="submit" @click="onSendUser" class="mt-2 btn btn-primary">Register</button>
+            <Input v-model="firstName" :type="'text'" :label="'First Name'" />
+            <Input v-model="lastName" :type="'text'" :label="'Last Name'" />
+            <Input v-model="email" :type="'email'" :label="'Email'" />
+            <Input v-model="password" :type="'password'" :label="'Password'" />
+            <button type="submit" :disabled="isLoading" @click="onSendUser" class="mt-2 btn btn-primary">Register</button>
         </form>
     </div>
 </template>
 <script>
+import { mapState } from 'vuex'
+
 export default {
     data() {
         return {
@@ -19,6 +21,11 @@ export default {
             email: '',
             password: ''
         }
+    },
+    computed: {
+        ...mapState({
+            isLoading: state => state.auth.isLoading
+        })
     },
     methods: {
         onSendUser() {
@@ -32,7 +39,13 @@ export default {
                 email: this.lastName,
                 password: this.password
             }
-            console.log(newOBJ);
+            this.$store.dispatch('getUser', newOBJ)
+                .then((res) => {
+                    console.log(res);
+                    this.$router.push('/')
+                }).catch(err => {
+                    console.log(err);
+                })
         }
     }
 }

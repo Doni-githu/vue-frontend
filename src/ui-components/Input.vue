@@ -1,6 +1,6 @@
 <template>
     <div class="mt-3 form-floating">
-        <input :value="modelValue" @input="this.$emit('update:modelValue', $event.target.value)" class="form-control" id="floatingPassword" :placeholder="label">
+        <input :type="type" :value="modelValue" @input="this.$emit('update:modelValue', $event.target.value)" class="form-control" id="floatingPassword" :placeholder="label">
         <label for="floatingPassword">{{ label }}</label>
     </div>
 </template>
@@ -8,6 +8,10 @@
 export default {
     props: {
         label: {
+            type: String,
+            required: true
+        },
+        type:{
             type: String,
             required: true
         },
