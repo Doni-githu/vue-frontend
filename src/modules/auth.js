@@ -1,5 +1,5 @@
 import Auth from "../service/auth";
-import { setItem } from "../helpers/Storage"
+import { removeItem, setItem } from "../helpers/Storage"
 const state = {
     isLoading: false,
     user: null,
@@ -53,6 +53,10 @@ const mutations = {
         state.isLoading = false
         state.isLoggIn = null
         state.err = payload
+    },
+    loguout(state) {
+        state.isLoggIn = null
+        removeItem("token")
     }
 }
 

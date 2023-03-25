@@ -46,10 +46,15 @@ const actions = {
                 })
         })
     },
-    add(context, product){
-        return new Promise(()=>{
+    add(context, product) {
+        return new Promise(() => {
             context.commit('StartAddProduct')
-            
+            Product.add(product)
+                .then((res) => {
+                    console.log(res);
+                }).catch((err) => {
+                    console.log(err);
+                })
         })
     }
 }

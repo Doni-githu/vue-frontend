@@ -40,9 +40,9 @@ export default {
             isLoggIn: state => state.auth.isLoggIn
         })
     },
-    methods:{
-        logout(){
-            
+    methods: {
+        logout() {
+            this.$store.commit('loguout')
         }
     }
 }
