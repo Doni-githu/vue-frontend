@@ -1,8 +1,8 @@
-import axios from "./axios"
+import axios from "./axios.js"
 
 const Product = {
-    getProduct(){
-        return axios.get('/api/todos', {headers: {"Content-type": 'text/json'}})
+    getProduct() {
+        return axios.get('/todos', { headers: { "Content-type": 'text/json' } })
     }
 }
 

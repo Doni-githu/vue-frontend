@@ -4,12 +4,17 @@
     <RouterView />
   </div>
 </template>
-<script setup>
+<script>
 import Navbar from './components/Navbar.vue';
 import { RouterView } from 'vue-router';
+export default {
+  components: {
+    Navbar
+  },
+}
 </script>
 <style>
-.conteiner{
+.conteiner {
   width: 90%;
   margin: 0 auto;
 }

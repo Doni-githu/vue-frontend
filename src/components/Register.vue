@@ -2,6 +2,12 @@
     <div class="w-50 mx-auto">
         <p class="fs-1 text-center">Register</p>
         <form @submit.prevent class="text-center">
+            <template v-if="error">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error!</strong> {{ error }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </template>
             <Input v-model="firstName" :type="'text'" :label="'First Name'" />
             <Input v-model="lastName" :type="'text'" :label="'Last Name'" />
             <Input v-model="email" :type="'email'" :label="'Email'" />
@@ -24,7 +30,8 @@ export default {
     },
     computed: {
         ...mapState({
-            isLoading: state => state.auth.isLoading
+            isLoading: state => state.auth.isLoading,
+            error: state => state.auth.err
         })
     },
     methods: {
@@ -41,10 +48,7 @@ export default {
             }
             this.$store.dispatch('getUser', newOBJ)
                 .then((res) => {
-                    console.log(res);
                     this.$router.push('/')
-                }).catch(err => {
-                    console.log(err);
                 })
         }
     }
