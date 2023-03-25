@@ -8,6 +8,8 @@ const state = {
 const mutations = {
     startProduct(state) {
         state.isLoading = true
+        state.data = null
+        state.err = null
     },
     SuccessProduct(state, payload) {
         state.isLoading = false
@@ -16,12 +18,25 @@ const mutations = {
     FailurProduct(state, payload) {
         state.isLoading = false
         state.error = payload
+    },
+    StartAddProduct(state) {
+        state.data = null
+        state.err = null
+        state.isLoading = true
+    },
+    SuccessAddProduct(state, payload) {
+        state.isLoading = false
+        state.data = payload
+    },
+    FailurAddProduct(state, payload) {
+        state.isLoading = false
+        state.err = payload
     }
 }
 
 const actions = {
     getProducts(context) {
-        return new Promise((resolve, reject) => {
+        return new Promise(() => {
             context.commit('startProduct')
             Product.getProduct()
                 .then(res => {
@@ -29,6 +44,12 @@ const actions = {
                 }).catch(err => {
                     context.commit('FailurProduct', err)
                 })
+        })
+    },
+    add(context, product){
+        return new Promise(()=>{
+            context.commit('StartAddProduct')
+            
         })
     }
 }

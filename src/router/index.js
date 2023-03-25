@@ -4,6 +4,7 @@ import AddView from "@/views/AddView.vue"
 import LoginView from "@/views/LoginView.vue"
 import RegisterView from "@/views/RegisterView.vue"
 import ProductView from "../views/ProductView.vue"
+import EditView from "../views/EditView.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,24 +15,29 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path:'/add',
-      name:'add',
+      path: '/add',
+      name: 'add',
       component: AddView
     },
     {
-      path:'/product',
-      name:'product',
+      path: '/product',
+      name: 'product',
       component: ProductView
     },
     {
-      path:'/login',
-      name:'login',
+      path: '/login',
+      name: 'login',
       component: LoginView
     },
     {
-      path:'/register',
-      name:'register',
+      path: '/register',
+      name: 'register',
       component: RegisterView
+    },
+    {
+      path: '/edit/:id',
+      name: 'edit',
+      component: EditView
     },
   ]
 })

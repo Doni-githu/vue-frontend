@@ -7,12 +7,13 @@
 <script>
 import Navbar from './components/Navbar.vue';
 import { RouterView } from 'vue-router';
+import { getItem } from "./helpers/Storage.js"
 export default {
   components: {
     Navbar
   },
   mounted() {
-    if (localStorage.getItem("token")) {
+    if (getItem("token")) {
       this.$store.dispatch('getUserByToken')
     }
   }
