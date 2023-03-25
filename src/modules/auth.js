@@ -9,7 +9,7 @@ const state = {
 
 const mutations = {
     StartRegist(state) {
-        state.isLoggIn = false
+        state.isLoggIn = null
         state.isLoading = true
         state.user = null
         state.err = null
@@ -20,15 +20,13 @@ const mutations = {
         state.user = payload
     },
     FailurRegist(state, error) {
-        state.isLoggIn = false
+        state.isLoggIn = null
         state.isLoading = false
         state.err = error
     },
     CurrentStart(state) {
-        state.isLoggIn = false
+        state.isLoggIn = null
         state.isLoading = true
-        state.user = null
-        state.err = null
     },
     CurrentSuccess(state, payload) {
         state.isLoading = false
@@ -36,9 +34,25 @@ const mutations = {
         state.user = payload
     },
     CurrentFailur(state, error) {
-        state.isLoggIn = false
+        state.isLoggIn = null
         state.isLoading = false
         state.err = error
+    },
+    StartLogin(state) {
+        state.isLoading = true
+        state.isLoggIn = null
+        state.user = null
+        state.errr = null
+    },
+    SuccessLogin(state, payload) {
+        state.isLoading = false
+        state.isLoggIn = true
+        state.user = payload
+    },
+    FailurLogin(state, payload) {
+        state.isLoading = false
+        state.isLoggIn = null
+        state.err = payload
     }
 }
 
@@ -50,7 +64,7 @@ const actions = {
                 .then((res) => {
                     resolve(res.data)
                     setItem("token", res.data.token)
-                    context.commit('SuccessRegist', res.data)
+                    context.commit('SuccessRegist', res.data._doc)
                 })
                 .catch(err => {
                     reject(err)
@@ -58,15 +72,25 @@ const actions = {
                 })
         })
     },
-    getUserByToken(context){
-        return new Promise(()=>{
+    getUserByToken(context) {
+        return new Promise(() => {
             context.commit('CurrentStart')
             Auth.getToken()
-                .then(res=>{
+                .then(res => {
                     context.commit('CurrentSuccess', res.data)
-                    console.log(res.data);
-                }).catch((err)=>{
-                    console.log(err);
+                }).catch((err) => {
+                    context.commit('CurrentFailur', err.response)
+                })
+        })
+    },
+    login(context, obj) {
+        return new Promise(() => {
+            context.commit('StartLogin')
+            Auth.AuthLogin(obj)
+                .then((res) => {
+                    console.log(res);
+                }).catch((err) => {
+                    context.commit('FailurLogin', err.response.data.message)
                 })
         })
     }

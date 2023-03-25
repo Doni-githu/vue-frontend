@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getItem } from "../helpers/Storage"
+import { getItem } from "../helpers/Storage.js"
 
 axios.defaults.baseURL = 'http://localhost:8000/api/'
 

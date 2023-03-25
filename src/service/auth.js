@@ -6,6 +6,9 @@ const Auth = {
     },
     getToken() {
         return axios.get('/user')
+    },
+    AuthLogin(obj) {
+        return axios.post('/login', { user: obj })
     }
 }
 

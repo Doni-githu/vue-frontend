@@ -11,8 +11,10 @@ export default {
   components: {
     Navbar
   },
-  mounted(){
-    this.$store.dispatch('getUserByToken')
+  mounted() {
+    if (localStorage.getItem("token")) {
+      this.$store.dispatch('getUserByToken')
+    }
   }
 }
 </script>

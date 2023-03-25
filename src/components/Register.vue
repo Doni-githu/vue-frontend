@@ -12,13 +12,12 @@
             <Input v-model="lastName" :type="'text'" :label="'Last Name'" />
             <Input v-model="email" :type="'email'" :label="'Email'" />
             <Input v-model="password" :type="'password'" :label="'Password'" />
-            <button type="submit" :disabled="isLoading" @click="onSendUser" class="mt-2 btn btn-primary">Register</button>
+            <button type="submit" @click="onSendUser" class="mt-2 btn btn-primary">Register</button>
         </form>
     </div>
 </template>
 <script>
 import { mapState } from 'vuex'
-
 export default {
     data() {
         return {
@@ -49,6 +48,8 @@ export default {
             this.$store.dispatch('getUser', newOBJ)
                 .then((res) => {
                     this.$router.push('/')
+                }).catch((err) => {
+                    console.log(err);
                 })
         }
     }
