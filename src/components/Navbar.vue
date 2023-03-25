@@ -11,22 +11,33 @@
         </a>
 
         <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-            <RouterLink class="me-3 py-2 text-dark text-decoration-none" to="/add">Add</RouterLink>
-            <RouterLink class="me-3 py-2 text-dark text-decoration-none" to="/product">Product</RouterLink>
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-primary">
-                    <RouterLink class="text-light text-decoration-none" to="/login">Login</RouterLink>
-                </button>
-                <button type="button" class="btn btn-success">
-                    <RouterLink class="text-light text-decoration-none" to="/register">Register</RouterLink>
-                </button>
-            </div>
+            <template v-if="isLoggIn">
+                <RouterLink class="me-3 py-2 text-dark text-decoration-none" to="/add">Add</RouterLink>
+                <RouterLink class="me-3 py-2 text-dark text-decoration-none" to="/product">Product</RouterLink>
+                <RouterLink class="me-3 py-2 text-dark text-decoration-none" to="/">{{ user.firstName }}</RouterLink>
+            </template>
+            <template v-if="!isLoggIn">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary">
+                        <RouterLink class="text-light text-decoration-none" to="/login">Login</RouterLink>
+                    </button>
+                    <button type="button" class="btn btn-success">
+                        <RouterLink class="text-light text-decoration-none" to="/register">Register</RouterLink>
+                    </button>
+                </div>
+            </template>
         </nav>
     </div>
 </template>
 <script>
 import { RouterLink } from "vue-router"
+import { mapState } from "vuex";
 export default {
-
+    computed: {
+        ...mapState({
+            user: state => state.auth.user,
+            isLoggIn: state => state.auth.isLoggIn
+        })
+    }
 }
 </script>
