@@ -84,13 +84,16 @@ const actions = {
         })
     },
     login(context, obj) {
-        return new Promise(() => {
+        return new Promise((resolve, reject) => {
             context.commit('StartLogin')
             Auth.AuthLogin(obj)
                 .then((res) => {
-                    console.log(res);
+                    resolve(res.data)
+                    setItem("token", res.data.token)
+                    context.commit('SuccessLogin', res.data._doc)
                 }).catch((err) => {
-                    context.commit('FailurLogin', err.response.data.message)
+                    reject(err)
+                    context.commit('FailurLogin', err.response)
                 })
         })
     }

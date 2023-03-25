@@ -42,11 +42,12 @@ export default {
             const newOBJ = {
                 firstName: this.firstName,
                 lastName: this.lastName,
-                email: this.lastName,
+                email: this.email,
                 password: this.password
             }
             this.$store.dispatch('getUser', newOBJ)
                 .then((res) => {
+                    console.log(res);
                     this.$router.push('/')
                 }).catch((err) => {
                     console.log(err);

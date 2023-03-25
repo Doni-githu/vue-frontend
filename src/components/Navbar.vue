@@ -15,6 +15,7 @@
                 <RouterLink class="me-3 py-2 text-dark text-decoration-none" to="/add">Add</RouterLink>
                 <RouterLink class="me-3 py-2 text-dark text-decoration-none" to="/product">Product</RouterLink>
                 <RouterLink class="me-3 py-2 text-dark text-decoration-none" to="/">{{ user.firstName }}</RouterLink>
+                <button type="button" class="btn btn-danger" @click="logout">Logout</button>
             </template>
             <template v-if="!isLoggIn">
                 <div class="btn-group" role="group" aria-label="Basic example">
@@ -38,6 +39,11 @@ export default {
             user: state => state.auth.user,
             isLoggIn: state => state.auth.isLoggIn
         })
+    },
+    methods:{
+        logout(){
+            
+        }
     }
 }
 </script>

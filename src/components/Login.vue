@@ -29,6 +29,8 @@ export default {
             this.$store.dispatch('login', newOBJ)
                 .then((res) => {
                     this.$router.push('/')
+                }).catch((err) => {
+
                 })
         }
     }
