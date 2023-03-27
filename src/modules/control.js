@@ -23,13 +23,14 @@ const mutations = {
 
 const actions = {
     add(context, product) {
-        return new Promise(() => {
+        return new Promise((resolve, reject) => {
             context.commit('StartAddProduct')
             Product.add(product)
                 .then((res) => {
-                    console.log(res.data);
+                    resolve(res.data)
+                    context.commit('SuccessAddProduct', res.data)
                 }).catch((err) => {
-                    console.log(err.response);
+                    context.commit('FailurAddProduct', err.response)
                 })
         })
     }

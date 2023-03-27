@@ -57,7 +57,7 @@ const mutations = {
     loguout(state) {
         state.isLoggIn = null
         removeItem("token")
-    }
+    },
 }
 
 const actions = {

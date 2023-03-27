@@ -16,7 +16,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch('getProducts')
-  }
+  },
 }
 </script>
 <style></style>

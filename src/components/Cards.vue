@@ -13,8 +13,10 @@
                     <div class="card-footer">
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-outline-primary">Detail</button>
-                            <button type="button" class="btn btn-outline-secondary">Edit</button>
-                            <button type="button" class="btn btn-outline-danger">Delete</button>
+                            <template v-if="isLoggIn && user._id === article.user">
+                                <button type="button" class="btn btn-outline-secondary">Edit</button>
+                                <button type="button" class="btn btn-outline-danger">Delete</button>
+                            </template>
                         </div>
                     </div>
                 </div>
@@ -23,6 +25,7 @@
     </div>
 </template>
 <script>
+import { mapState } from "vuex";
 import moment from "moment"
 export default {
     props: {
@@ -31,15 +34,21 @@ export default {
             required: true
         }
     },
-    methods:{
-        momentJS(date){
+    computed: {
+        ...mapState({
+            isLoggIn: state => state.auth.isLoggIn,
+            user: state => state.auth.user
+        })
+    },
+    methods: {
+        momentJS(date) {
             return moment(date).format("DD, MMM, YYYY")
         }
     }
 }
 </script>
 <style>
-.car p{
+.car p {
     width: 90%;
     margin: 20px auto;
 }

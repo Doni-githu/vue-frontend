@@ -19,19 +19,6 @@ const mutations = {
         state.isLoading = false
         state.error = payload
     },
-    StartAddProduct(state) {
-        state.data = null
-        state.err = null
-        state.isLoading = true
-    },
-    SuccessAddProduct(state, payload) {
-        state.isLoading = false
-        state.data = payload
-    },
-    FailurAddProduct(state, payload) {
-        state.isLoading = false
-        state.err = payload
-    }
 }
 
 const actions = {
@@ -46,17 +33,6 @@ const actions = {
                 })
         })
     },
-    add(context, product) {
-        return new Promise(() => {
-            context.commit('StartAddProduct')
-            Product.add(product)
-                .then((res) => {
-                    console.log(res);
-                }).catch((err) => {
-                    console.log(err);
-                })
-        })
-    }
 }
 
 export default {

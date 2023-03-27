@@ -12,11 +12,13 @@
                     <label for="floatingInputGroup1">Price</label>
                 </div>
             </div>
-            <button class="btn btn-primary" @click="AddProduct">Add product</button>
+            <button class="btn btn-primary" @click="AddProduct" :disabled="isLoading">Add product</button>
         </form>
     </div>
 </template>
 <script>
+import { getItem } from '../helpers/Storage.js'
+import { mapState } from 'vuex'
 export default {
     data() {
         return {
@@ -25,6 +27,11 @@ export default {
             image: '',
             price: ''
         }
+    },
+    computed: {
+        ...mapState({
+            isLoading: state => state.control.isLoading
+        })
     },
     methods: {
         AddProduct() {
@@ -38,9 +45,15 @@ export default {
                 image: this.image,
                 price: this.price
             }
-            console.log(obj);
+            this.$store.dispatch('add', obj).then(()=>{
+                this.$router.push('/')
+            })
+            this.title = ''
+            this.description = ''
+            this.image = ''
+            this.price = ''
         }
-    }
+    },
 }
 </script>
 <style>
