@@ -18,27 +18,33 @@
 </template>
 <script>
 export default {
+    props: {
+        detail: {
+            type: Object,
+            required: true
+        }
+    },
     data() {
         return {
-            title: '',
-            description: '',
-            image: '',
-            price: '',
+            title2: this.detail.title,
+            description2: this.detail.description,
+            image2: this.detail.image,
+            price2: this.detail.price,
         }
     },
     methods: {
         EditProduct() {
-            if (!this.title || !this.description || !this.image || !this.price) {
+            if (!this.title2 || !this.description2 || !this.image2 || !this.price2) {
                 alert("All fields are required")
                 return
             }
             const obj = {
-                title: this.title,
-                description: this.description,
-                image: this.image,
-                price: this.price
+                title: this.title2,
+                description: this.description2,
+                image: this.image2,
+                price: this.price2
             }
-            console.log(obj);
+            this.$store.dispatch('editArticle', { id: this.$route.params.id, article: obj })
         }
     }
 }

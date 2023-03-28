@@ -1,15 +1,14 @@
 <template>
     <div>
-        <Edit v-if="detail" :detail="detail" />
+        <ArticleDetail v-if="detail" :detail="detail" />
     </div>
 </template>
 <script>
 import { mapState } from 'vuex';
-import Edit from '../components/Edit.vue';
+import ArticleDetail from '../components/ArticleDetail.vue';
+
 export default {
-    components: {
-        Edit
-    },
+    components: { ArticleDetail },
     computed: {
         ...mapState({
             detail: state => state.control.detail

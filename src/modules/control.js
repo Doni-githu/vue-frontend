@@ -2,7 +2,8 @@ import Product from "../service/product.js"
 const state = {
     isLoading: false,
     data: null,
-    error: null
+    error: null,
+    detail: null
 }
 
 const mutations = {
@@ -18,6 +19,32 @@ const mutations = {
     FailurAddProduct(state, payload) {
         state.isLoading = false
         state.err = payload
+    },
+    StartDelete(state) {
+        state.isLoading = true
+    },
+    SuccessDelete(state) {
+        state.isLoading = false
+    },
+    FailurDelete(state) {
+        state.isLoading = false
+    },
+    StartGetArticleDetail(state) {
+        state.isLoading = true
+        state.detail = null
+    },
+    SuccessGetArticleDetail(state, payload) {
+        state.isLoading = false
+        state.detail = payload
+    },
+    FailurGetArticleDetail(state) {
+        state.isLoading = false
+    },
+    StartEditArticle(state) {
+        state.isLoading = true
+    },
+    SuccessEditArticle(state) {
+        state.isLoading = false
     }
 }
 
@@ -31,6 +58,40 @@ const actions = {
                     context.commit('SuccessAddProduct', res.data)
                 }).catch((err) => {
                     context.commit('FailurAddProduct', err.response)
+                })
+        })
+    },
+    delete(context, id) {
+        return new Promise(() => {
+            context.commit('StartDelete')
+            Product.delete(id)
+                .then(() => {
+                    context.commit('SuccessDelete')
+                }).catch(() => {
+                    context.commit('FailurDelete')
+                })
+        })
+    },
+    detail(context, id) {
+        return new Promise(() => {
+            context.commit('StartGetArticleDetail')
+            Product.ArticleDetail(id)
+                .then((res) => {
+                    context.commit('SuccessGetArticleDetail', res.data)
+                }).catch(() => {
+                    context.commit('FailurGetArticleDetail')
+                })
+        })
+    },
+    editArticle(context, { id, article }) {
+        return new Promise(() => {
+            context.commit('StartEditArticle')
+            console.log(article);
+            Product.edit(id, article)
+                .then(() => {
+                    context.commit('SuccessEditArticle')
+                }).catch((err) => {
+                    context.commit('SuccessEditArticle')
                 })
         })
     }

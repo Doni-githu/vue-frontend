@@ -45,8 +45,8 @@ export default {
                 image: this.image,
                 price: this.price
             }
-            this.$store.dispatch('add', obj).then(()=>{
-                this.$router.push('/')
+            this.$store.dispatch('add', obj).then((Res)=>{
+                this.$router.push("/")
             })
             this.title = ''
             this.description = ''

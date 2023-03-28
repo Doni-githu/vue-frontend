@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col" v-for="article in data">
+            <div class="col" v-for="article in data" :key="article._id">
                 <div class="card car shadow-sm">
                     <img :src="article.image">
                     <p class="fs-5">{{ article.title }}</p>
@@ -12,10 +12,13 @@
                     </div>
                     <div class="card-footer">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-outline-primary">Detail</button>
+                            <button type="button" class="btn btn-outline-primary"
+                                @click="Detail(article._id)">Detail</button>
                             <template v-if="isLoggIn && user._id === article.user">
-                                <button type="button" class="btn btn-outline-secondary">Edit</button>
-                                <button type="button" class="btn btn-outline-danger">Delete</button>
+                                <button type="button" class="btn btn-outline-secondary"
+                                    @click="EditArticle(article._id)">Edit</button>
+                                <button type="button" :disabled="isLoading" @click="Delete(article._id)"
+                                    class="btn btn-outline-danger">Delete</button>
                             </template>
                         </div>
                     </div>
@@ -37,12 +40,23 @@ export default {
     computed: {
         ...mapState({
             isLoggIn: state => state.auth.isLoggIn,
-            user: state => state.auth.user
+            user: state => state.auth.user,
+            isLoading: state => state.control.isLoading
         })
     },
     methods: {
         momentJS(date) {
             return moment(date).format("DD, MMM, YYYY")
+        },
+        Delete(id) {
+            this.$store.dispatch("delete", id)
+            this.$store.dispatch('getProducts')
+        },
+        Detail(id) {
+            this.$router.push(`/detail/${id}`)
+        },
+        EditArticle(id) {
+            this.$router.push(`/edit/${id}`)
         }
     }
 }

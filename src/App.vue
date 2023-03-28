@@ -14,7 +14,6 @@ export default {
   },
   mounted() {
     if (getItem("token")) {
-      console.log("Token bor");
       this.$store.dispatch('getUserByToken')
     }
   }
