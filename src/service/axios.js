@@ -7,7 +7,7 @@ axios.interceptors.request.use(config => {
     const token = getItem('token')
     const authorization = token ? `${token}` : ''
     config.headers.Authorization = authorization
-    config.headers['Content-Type'] = 'text/json'
+    config.headers['Content-Type'] = 'application/json'
     return config
 })
 export default axios

@@ -42,8 +42,12 @@ const mutations = {
     },
     StartEditArticle(state) {
         state.isLoading = true
+        state.detail = null
     },
     SuccessEditArticle(state) {
+        state.isLoading = false
+    },
+    FailurEditArticle(state) {
         state.isLoading = false
     }
 }
@@ -73,10 +77,11 @@ const actions = {
         })
     },
     detail(context, id) {
-        return new Promise(() => {
+        return new Promise((resolve) => {
             context.commit('StartGetArticleDetail')
             Product.ArticleDetail(id)
                 .then((res) => {
+                    resolve(res.data)
                     context.commit('SuccessGetArticleDetail', res.data)
                 }).catch(() => {
                     context.commit('FailurGetArticleDetail')
@@ -84,14 +89,14 @@ const actions = {
         })
     },
     editArticle(context, { id, article }) {
-        return new Promise(() => {
+        return new Promise((resolve) => {
             context.commit('StartEditArticle')
-            console.log(article);
             Product.edit(id, article)
-                .then(() => {
+                .then((res) => {
+                    resolve(res.data)
                     context.commit('SuccessEditArticle')
-                }).catch((err) => {
-                    context.commit('SuccessEditArticle')
+                }).catch(() => {
+                    context.commit('FailurEditArticle')
                 })
         })
     }

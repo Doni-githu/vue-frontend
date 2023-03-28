@@ -7,7 +7,7 @@
 <script>
 import Navbar from './components/Navbar.vue';
 import { RouterView } from 'vue-router';
-import { getItem } from "./helpers/Storage"
+import { getItem } from "./helpers/Storage.js"
 export default {
   components: {
     Navbar

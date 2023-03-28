@@ -2,13 +2,13 @@
     <div>
         <p class="fs-1 text-center">Edit product</p>
         <form @submit.prevent class="w-50 text-center mx-auto">
-            <Input v-model="title" :type="'text'" :label="'Title'" />
-            <Input v-model="description" :type="'text'" :label="'Description'" />
-            <Input v-model="image" :type="'text'" :label="'Image'" />
+            <Input v-model="title2" :type="'text'" :label="'Title'" />
+            <Input v-model="description2" :type="'text'" :label="'Description'" />
+            <Input v-model="image2" :type="'text'" :label="'Image'" />
             <div class="input-group mt-16px">
                 <span class="input-group-text">$</span>
                 <div class="form-floating">
-                    <input v-model="price" type="number" class="form-control" id="floatingInputGroup1" placeholder="Price">
+                    <input v-model="price2" type="number" class="form-control" id="floatingInputGroup1" placeholder="Price">
                     <label for="floatingInputGroup1">Price</label>
                 </div>
             </div>
@@ -45,6 +45,10 @@ export default {
                 price: this.price2
             }
             this.$store.dispatch('editArticle', { id: this.$route.params.id, article: obj })
+                .then((res) => {
+                    console.log(res);
+                    this.$router.push('/')
+                })
         }
     }
 }
