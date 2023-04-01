@@ -42,7 +42,6 @@ const mutations = {
     },
     StartEditArticle(state) {
         state.isLoading = true
-        state.detail = null
     },
     SuccessEditArticle(state) {
         state.isLoading = false

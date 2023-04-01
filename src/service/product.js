@@ -16,6 +16,9 @@ const Product = {
     ArticleDetail(id) {
         return axios.get(`/todo/detail/${id}`)
     },
+    product() {
+        return axios.get('/todo')
+    }
 }
 
 export default Product

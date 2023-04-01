@@ -9,7 +9,6 @@ const state = {
 
 const mutations = {
     StartRegist(state) {
-        state.isLoggIn = null
         state.isLoading = true
         state.user = null
         state.err = null
@@ -25,7 +24,6 @@ const mutations = {
         state.err = error
     },
     CurrentStart(state) {
-        state.isLoggIn = null
         state.isLoading = true
     },
     CurrentSuccess(state, payload) {
@@ -40,7 +38,6 @@ const mutations = {
     },
     StartLogin(state) {
         state.isLoading = true
-        state.isLoggIn = null
         state.user = null
         state.errr = null
     },

@@ -8,7 +8,6 @@ const state = {
 const mutations = {
     startProduct(state) {
         state.isLoading = true
-        state.data = null
         state.err = null
     },
     SuccessProduct(state, payload) {
@@ -33,6 +32,18 @@ const actions = {
                 })
         })
     },
+    getUserProducts(context) {
+        return new Promise(() => {
+            context.commit('startProduct')
+            Product.product()
+                .then(res => {
+                    console.log(res.data);
+                    context.commit('SuccessProduct', res.data)
+                }).catch(err => {
+                    context.commit('FailurProduct', err)
+                })
+        })
+    }
 }
 
 export default {
