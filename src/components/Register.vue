@@ -1,10 +1,10 @@
 <template>
-    <div class="w-50 mx-auto">
+    <div class="w-50 form mx-auto">
         <p class="fs-1 text-center">Register</p>
         <form @submit.prevent class="text-center">
             <template v-if="error">
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Error!</strong> {{ error }}
+                    <strong>Error!</strong> {{ error.message }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </template>
@@ -56,4 +56,22 @@ export default {
     }
 }
 </script>
-<style></style>
+<style scoped>
+@media only screen and (max-width:768px){
+    .form{
+        width: 70% !important;
+    }
+}
+
+@media only screen and (max-width:518px){
+    .form{
+        width: 90% !important;
+    }
+}
+
+@media only screen and (max-width:400px){
+    .form{
+        width: 100% !important;
+    }
+}
+</style>

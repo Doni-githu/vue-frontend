@@ -46,8 +46,7 @@ export default {
             }
             this.$store.dispatch('editArticle', { id: this.$route.params.id, article: obj })
                 .then((res) => {
-                    console.log(res);
-                    this.$router.push('/')
+                    this.$router.push("/")
                 })
         }
     }

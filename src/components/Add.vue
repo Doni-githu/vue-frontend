@@ -1,7 +1,7 @@
 <template>
     <div>
         <p class="fs-1 text-center">Add product</p>
-        <form @submit.prevent class="w-50 text-center mx-auto">
+        <form @submit.prevent class="w-50 form text-center mx-auto">
             <Input v-model="title" :type="'text'" :label="'Title'" />
             <Input v-model="description" :type="'text'" :label="'Description'" />
             <Input v-model="image" :type="'text'" :label="'Image'" />
@@ -17,7 +17,6 @@
     </div>
 </template>
 <script>
-import { getItem } from '../helpers/Storage.js'
 import { mapState } from 'vuex'
 export default {
     data() {
@@ -45,7 +44,7 @@ export default {
                 image: this.image,
                 price: this.price
             }
-            this.$store.dispatch('add', obj).then((Res)=>{
+            this.$store.dispatch('add', obj).then(() => {
                 this.$router.push("/")
             })
             this.title = ''
@@ -60,5 +59,23 @@ export default {
 .mt-16px {
     margin-top: 16px;
     margin-bottom: 16px;
+}
+
+@media only screen and (max-width:768px) {
+    .form {
+        width: 70% !important;
+    }
+}
+
+@media only screen and (max-width:500px) {
+    .form {
+        width: 90% !important;
+    }
+}
+
+@media only screen and (max-width:414px) {
+    .form {
+        width: 100% !important;
+    }
 }
 </style>

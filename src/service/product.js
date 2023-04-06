@@ -8,7 +8,7 @@ const Product = {
         return axios.post('/todo/add', { product })
     },
     edit(id, article) {
-        return axios.post(`/todo/edit/${id}`, { article })
+        return axios.put(`/todo/edit/${id}`, { article })
     },
     delete(id) {
         return axios.delete(`/todo/delete/${id}`)

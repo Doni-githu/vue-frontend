@@ -94,7 +94,7 @@ const actions = {
                     context.commit('SuccessLogin', res.data._doc)
                 }).catch((err) => {
                     reject(err)
-                    context.commit('FailurLogin', err.response)
+                    context.commit('FailurLogin', err.response.data)
                 })
         })
     }

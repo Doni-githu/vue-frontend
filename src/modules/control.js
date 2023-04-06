@@ -43,8 +43,9 @@ const mutations = {
     StartEditArticle(state) {
         state.isLoading = true
     },
-    SuccessEditArticle(state) {
+    SuccessEditArticle(state, payload) {
         state.isLoading = false
+        state.data = payload
     },
     FailurEditArticle(state) {
         state.isLoading = false
@@ -93,7 +94,7 @@ const actions = {
             Product.edit(id, article)
                 .then((res) => {
                     resolve(res.data)
-                    context.commit('SuccessEditArticle')
+                    context.commit('SuccessEditArticle',)
                 }).catch(() => {
                     context.commit('FailurEditArticle')
                 })
